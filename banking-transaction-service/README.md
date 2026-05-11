@@ -106,4 +106,7 @@ Swagger UI=
 v3/docs=
 ![img_6.png](img_6.png)
 
+TEST THE APIS
+The collection to test the APIs are in the 'apis-test' folder
+
 Thanks
