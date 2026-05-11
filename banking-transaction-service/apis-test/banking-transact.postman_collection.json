@@ -1,0 +1,191 @@
+{
+  "info": {
+    "_postman_id": "67ebaf7f-33ff-4c02-bc71-c2484cecdd06",
+    "name": "banking-transact",
+    "description": "APIs for the test",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "6607278"
+  },
+  "item": [
+    {
+      "name": "CreateUser",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"username\":  \"USERTEST2\",\r\n  \"password\" : \"passwrtest\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/auth/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "auth",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CreateToken",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"username\":  \"USERTEST1\",\r\n  \"password\" : \"passwrtest\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/auth/token",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "auth",
+            "token"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CreateTransact",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVU0VSVEVTVDEiLCJpYXQiOjE3Nzg1MzQ1NTksImV4cCI6MTc3ODUzODE1OX0.tztVR1WhI5MUBEXRPI9PYofQ6VZSAaf83R007kPEIeE",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"amount\": 100,\r\n  \"currency\": \"USD\", \r\n  \"description\": \"Payment for invoice #12345\",\r\n  \"counterpartyIban\": \"INV9370400440532013000\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/transactions",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "transactions"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "LIstTransact",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVU0VSVEVTVDEiLCJpYXQiOjE3Nzg1MzQ1NTksImV4cCI6MTc3ODUzODE1OX0.tztVR1WhI5MUBEXRPI9PYofQ6VZSAaf83R007kPEIeE",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"amount\": 100,\r\n  \"currency\": \"USD\", \r\n  \"description\": \"Payment for invoice #12345\",\r\n  \"counterpartyIban\": \"INV9370400440532013000\"\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/transactions?from=2026-05-01&to=2026-05-31&page=0&size=10",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "transactions"
+          ],
+          "query": [
+            {
+              "key": "from",
+              "value": "2026-05-01"
+            },
+            {
+              "key": "to",
+              "value": "2026-05-31"
+            },
+            {
+              "key": "page",
+              "value": "0"
+            },
+            {
+              "key": "size",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVU0VSVEVTVDEiLCJpYXQiOjE3Nzg1MzI2OTEsImV4cCI6MTc3ODUzNjI5MX0.N7lkrHnoHEO7ri9r-0xlMc8B2smVo-3ufToa0fcL3BA",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
