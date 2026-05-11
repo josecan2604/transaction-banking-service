@@ -10,5 +10,5 @@ import lombok.*;
 @AllArgsConstructor
 public class CreateUserResponse {
 
-    private String response;
+    private String userName;
 }

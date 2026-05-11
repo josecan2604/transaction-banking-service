@@ -13,6 +13,22 @@ services:
         POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
         POSTGRES_DB: "${POSTGRES_DB}"
 
+  banking-service:
+    image: jarana26/banking-transaction-service:1.0 #Public Repo
+    container_name: banking-service
+    depends_on:
+      - postgresql
+    ports:
+      - "8080:8080"
+    networks:
+      - batch_network
+    environment:
+      SPRING_DATASOURCE_URL: "${SPRING_DATASOURCE_URL}"
+      SPRING_DATASOURCE_USERNAME: "${POSTGRES_USER}"
+      SPRING_DATASOURCE_PASSWORD: "${POSTGRES_PASSWORD}"
+      JAVA_OPTS: "${JAVA_OPTS}"
+
+    restart: always
 
 volumes:
   challenge_postgresql_data:
