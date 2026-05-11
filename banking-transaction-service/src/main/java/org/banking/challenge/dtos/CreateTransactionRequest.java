@@ -1,3 +1,4 @@
+
 package org.banking.challenge.dtos;
 
 
@@ -27,4 +28,6 @@ public class CreateTransactionRequest {
     @NotBlank
     @Pattern(regexp = "^[A-Z0-9]{15,34}$")
     private String counterpartyIban;
+
+
 }

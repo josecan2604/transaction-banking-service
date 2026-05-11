@@ -16,6 +16,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneOffset;
 
 @Service
 @RequiredArgsConstructor
@@ -27,15 +30,13 @@ public class TransactionService {
     @Transactional
     public TransactionResponse createTransaction(
             CreateTransactionRequest request,
-            Authentication authentication
+           Authentication authentication
     ) {
 
         User user = userRepository
                 .findByUsername(authentication.getName())
-                .orElseThrow(
-                        () -> new RuntimeException(
-                                "User not found"
-                        )
+                .orElseThrow(() ->
+                        new RuntimeException("User not found")
                 );
 
         LedgerTransaction transaction =
@@ -54,6 +55,7 @@ public class TransactionService {
                                 request.getCounterpartyIban()
                                         .replace(" ", "")
                         )
+                        .createdAt(Instant.now())
                         .build();
 
         LedgerTransaction saved =
@@ -63,9 +65,9 @@ public class TransactionService {
     }
 
     public Page<TransactionResponse> getTransactions(
-            Authentication authentication,
-            Instant from,
-            Instant to,
+           Authentication authentication,
+           LocalDate from,
+           LocalDate to,
             int page,
             int size
     ) {
@@ -78,10 +80,17 @@ public class TransactionService {
                         )
                 );
 
+        Instant fromInstant = from
+                .atStartOfDay(ZoneOffset.UTC)
+                .toInstant();
+
+        Instant toInstant = to
+                .atTime(LocalTime.MAX)
+                .toInstant(ZoneOffset.UTC);
         return repository.findByUserIdAndCreatedAtBetween(
                         user.getId(),
-                        from,
-                        to,
+                        fromInstant,
+                        toInstant,
                         PageRequest.of(page, size)
                 )
                 .map(this::map);

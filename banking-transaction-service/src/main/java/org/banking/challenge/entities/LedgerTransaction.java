@@ -40,6 +40,7 @@ public class LedgerTransaction {
 
     @Column(nullable = false)
     private String counterpartyIban;
+
     @CreationTimestamp
     private Instant createdAt;
 }
